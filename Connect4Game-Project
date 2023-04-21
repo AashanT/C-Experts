@@ -237,4 +237,26 @@ public abstract class GameBoard
         }
 
     }
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Welcome to Connect 4!");
+            Console.WriteLine();
+            Console.WriteLine("Instructions:");
+            Console.WriteLine("Enter the column number (1-7) to drop a piece in that column.");
+            Console.WriteLine("Get four pieces in a row (horizontally, vertically, or diagonally) to win.");
+            Console.WriteLine();
+            Console.WriteLine("Player 1: Yellow | Player 2: Red");
+            Console.WriteLine();
+            Console.WriteLine("Press Enter to begin.");
+            Console.ReadLine();
+
+            ConsoleGameBoard board = new ConsoleGameBoard(6, 7);
+            Connect4 game = new Connect4(board);
+            game.Play();
+            
+        }
+    }
+}
     
