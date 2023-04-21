@@ -43,3 +43,45 @@ public abstract class GameBoard
         }
         return true;
     }
+    
+     public bool MakeMove(int col, int player)
+    {
+        // Check if the move is valid
+        if (!IsMoveValid(col))
+        {
+            return false;
+        }
+        // Find the first available row in the column
+        int row = numRows - 1;
+        while (board[row, col - 1] != 0)
+        {
+            row--;
+        }
+        board[row, col-1] = player;
+        return true;
+    }
+
+    public bool CheckWin(int player)
+    {
+        // Check for horizontal wins
+        for (int i = 0; i < numRows; i++)
+        {
+            for (int j = 0; j < numCols - 3; j++)
+            {
+                if (board[i, j] == player && board[i, j + 1] == player && board[i, j + 2] == player && board[i, j + 3] == player)
+                {
+                    return true;
+                }
+            }
+        }
+        // Check for vertical wins
+        for (int i = 0; i < numRows - 3; i++)
+        {
+            for (int j = 0; j < numCols; j++)
+            {
+                if (board[i, j] == player && board[i + 1, j] == player && board[i + 2, j] == player && board[i + 3, j] == player)
+                {
+                    return true;
+                }
+            }
+        }
