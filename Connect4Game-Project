@@ -1,0 +1,45 @@
+using System;
+
+public interface IGame
+{
+    void Play();
+}
+
+public abstract class GameBoard
+{
+    protected int[,] board;
+    protected int numRows;
+    protected int numCols;
+
+    public GameBoard(int numRows, int numCols)
+    {
+        this.numRows = numRows;
+        this.numCols = numCols;
+        this.board = new int[numRows, numCols];
+
+        // Initialize the board with all zeros
+        for (int i = 1; i <= numRows; i++)
+        {
+            for (int j = 1; j <= numCols; j++)
+            {
+                board[i - 1, j - 1] = 0;
+            }
+        }
+    }
+
+    public abstract void DrawBoard();
+
+    public bool IsMoveValid(int col)
+    {
+        // Check if the column is within range
+        if (col < 1 || col > numCols)          
+        {
+            return false;
+        }
+        // Check if the column is already full
+        if (board[0, col-1] != 0) 
+        {
+            return false;
+        }
+        return true;
+    }
