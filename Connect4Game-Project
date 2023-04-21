@@ -85,3 +85,29 @@ public abstract class GameBoard
                 }
             }
         }
+        // Check for diagonal wins (top-left to bottom-right)
+        for (int i = 0; i < numRows - 3; i++)
+        {
+            for (int j = 0; j < numCols - 3; j++)
+            {
+                if (board[i, j] == player && board[i + 1, j + 1] == player && board[i + 2, j + 2] == player && board[i + 3, j + 3] == player)
+                {
+                    return true;
+                }
+            }
+        }
+        // Check for diagonal wins (bottom-left to top-right)
+        for (int i = 3; i < numRows; i++)
+        {
+            for (int j = 0; j < numCols - 3; j++)
+            {
+                if (board[i, j] == player && board[i - 1, j + 1] == player && board[i - 2, j + 2] == player && board[i - 3, j + 3] == player)
+                {
+                    return true;
+                }
+            }
+
+
+        }
+        return false;
+    }
