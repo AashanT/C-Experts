@@ -150,5 +150,63 @@ public abstract class GameBoard
             Console.WriteLine();
         }
     }
-    
+    public class Connect4 : IGame
+    {
+        private GameBoard board;
+        private int currentPlayer;
+        private int numMoves;
+
+        public Connect4(GameBoard board)
+        {
+            this.board = board;
+            this.currentPlayer = 1;
+            this.numMoves = 0;
+        }
+
+        public void Play()
+        {
+            while (true)
+            {
+                board.DrawBoard();
+                Console.WriteLine("Player " + currentPlayer + ", enter column (1-7):");
+                int col;
+                if (!int.TryParse(Console.ReadLine(), out col))
+                {
+                    continue;
+                }
+                if (board.MakeMove(col, currentPlayer))
+                {
+                    numMoves++;
+                    if (board.CheckWin(currentPlayer))
+                    {
+                        board.DrawBoard();
+                        Console.WriteLine("Player " + currentPlayer + " wins!");
+                        RestartGame();
+                        return;
+                    }
+                    else if (numMoves == board.numRows * board.numCols)
+                    {
+                        board.DrawBoard();
+                        Console.WriteLine("It's a draw!");
+                        RestartGame();
+                        return;
+                    }
+                    else
+                    {
+                        if (currentPlayer == 1)
+                        {
+                            currentPlayer = 2;
+                        }
+                        else
+                        {
+                            currentPlayer = 1;
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid move. Try again.");
+                }
+            }
+        }
     
