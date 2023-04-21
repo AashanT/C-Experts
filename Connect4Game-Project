@@ -209,4 +209,32 @@ public abstract class GameBoard
                 }
             }
         }
+           public void RestartGame()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Do you want to restart the game? Yes(y) | No(n).");
+            string answer = Console.ReadLine().ToLower();
+
+            if (answer == "y")
+            {
+                ConsoleGameBoard board = new ConsoleGameBoard(6, 7);
+                Connect4 newGame = new Connect4(board);
+                newGame.Play();
+            }
+            else if (answer == "n")
+            {
+                Console.WriteLine();
+                Console.WriteLine("Thanks for playing!");
+                return;
+            }
+            else
+            {
+                Console.WriteLine();
+                Console.WriteLine("Invalid input. Please enter 'y' or 'n'.");
+                RestartGame();
+                return;
+            }
+        }
+
+    }
     
